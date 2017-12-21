@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-    hello world!!
+    <m-header></m-header>
   </div>
 </template>
 
 <script>
+import MHeader from './components/m-header/m-header'
 export default {
-  name: "app"
+  components:{
+    MHeader
+  }
 };
 </script>
 
-<style>
+<style lang="stylus" scoped>
 
 </style>
+

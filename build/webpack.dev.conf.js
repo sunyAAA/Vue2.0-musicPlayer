@@ -10,6 +10,13 @@ const portfinder = require('portfinder')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
+// 数据mock 配置
+const express  = require('express')
+const app = express()
+var appData = require('../data.json')
+var data = appData.data
+var apiRoutes = express.Router()
+app.use('/api',apiRoutes);
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -35,6 +42,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
+    },
+    // get请求配置
+    before(app){
+      app.get('api/recommend',(req,res){
+        res.json({
+          data:data
+        })
+      })
     }
   },
   plugins: [

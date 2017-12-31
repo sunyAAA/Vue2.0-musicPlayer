@@ -12,6 +12,11 @@ import Tab from 'components/tab/tab'
 export default {
   components:{
     MHeader,Tab
+  },
+  created(){
+    this.$http.get('/api/recommend').then((res)=>{
+      console.log(res.data);
+    })
   }
 };
 </script>

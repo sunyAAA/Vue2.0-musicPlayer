@@ -32,7 +32,8 @@ export default {
     Slider
   },
   created(){
-    this._getRecommend()
+    this._getRecommend();
+    this._getDiscList();
   },
   methods:{
     _getRecommend(){
@@ -40,6 +41,11 @@ export default {
         if(res.code === ERR_OK){
           this.recommends = res.data.slider;
         }
+      })
+    },
+    _getDiscList(){
+      this.$http.get('api/getDiscList').then((res)=>{
+        console.log(res.data);
       })
     }
   }

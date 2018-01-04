@@ -45,7 +45,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     // get请求配置
     before(app){
-      app.get('/api/recommend',(req,res)=>{
+      app.get('/api/getDiscList',(req,res)=>{
         res.json({
           data:data
         })

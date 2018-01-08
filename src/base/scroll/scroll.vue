@@ -50,7 +50,7 @@ export default {
     data(){
       setTimeout(() => {
         this.refresh();
-      }, 60);
+      }, 20);
     }
   }
 }

@@ -7,6 +7,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Axios from 'axios'
+import store from './store'
 import VueLazyLoad from 'vue-lazyload'
 import 'common/stylus/index.styl'
 //fastclick 用法
@@ -20,9 +21,7 @@ Vue.use(VueLazyLoad,{
 })
 new Vue({
   el: '#app',
+  render: h => h(App),
   router,
-  template: '<App/>',
-  components: {
-    App
-  }
+  store
 })

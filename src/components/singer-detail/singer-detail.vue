@@ -7,7 +7,43 @@
 </template>
 
 <script>
-export default {};
+import {mapGetters} from 'vuex'
+import {getSingerDetail} from 'api/singer'
+import {ERR_OK} from 'api/config'
+export default {
+  data(){
+    return{
+      songs: []
+    }
+  },
+  computed:{
+    ...mapGetters([
+      'singer'
+    ])
+  },
+  created(){
+    this._getDetail()
+  },
+  methods:{
+    _getDetail(){
+      if(!this.singer.id){
+        this.$router.push('/singer');
+        return
+      }
+      getSingerDetail(this.singer.id).then(res=>{
+        if(res.code === ERR_OK){
+          console.log(res.data);
+        }
+      })
+    },
+    _normalizeSongs(list){
+      let ret = [];
+      list.forEach(element => {
+        let {musicData} = item 
+      });
+    }
+  }
+};
 </script>
 
 <style lang="stylus" scoped>

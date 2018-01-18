@@ -1,18 +1,37 @@
 <template>
   <div class="song-list">
-    <ul></ul>
+    <ul>
+      <li v-for='(song,index) in songs' :key='index' class="item">
+        <div class="content">
+          <h2 class="name">{{song.name}}</h2>
+          <p class="desc">{{getDesc(song)}}</p>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
-  
+  props:{
+    songs:{
+      type : Array,
+      default : function(){
+        return []
+      }
+    }
+  },
+  methods:{
+    getDesc(song){
+      return `${song.singer}。${song.album}`
+    }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
-  @import "~common/style/variable"
-  @import "~common/style/mixin"
+  @import "~common/stylus/variable"
+  @import "~common/stylus/mixin"
 
   .song-list
     .item

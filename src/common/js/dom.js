@@ -39,7 +39,7 @@ let vendor = (()=>{
   }
   return false
 })()
-
+// transform 自动添加前缀
 export function prefixStyle(style){
   if(vendor === false){
     return false

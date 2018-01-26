@@ -57,7 +57,9 @@
           <h2 class="name" v-html='currentSong.name'></h2>
           <p class="desc"  v-html='currentSong.singer'></p>
         </div>
-        <div class="control"></div>
+        <div class="control">
+          <i class="icon-mini"></i>
+        </div>
         <div class="control">
           <i class="icon-playList"></i> 
         </div>

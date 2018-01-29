@@ -180,7 +180,7 @@ export default {
     },
     leave(el,done){
       this.$refs.cdWrapper.style.transition = 'all 0.3s linear'
-      const {x,y,scale} = this._getPosAndScale();
+      const {x,y,scale} = this._getPosAndScale()
       this.$refs.cdWrapper.style[transform] = `translate3d(${x}px,${y}px,0) scale(${scale})`
       this.$refs.cdWrapper.addEventListener('transitionend',done)
     },

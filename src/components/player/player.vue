@@ -29,8 +29,12 @@
         <div class="bottom">
           <div class="progress-wrapper">
             <span class="time time-l">{{format(currentTime)}}</span>
-            <div class="progress-bar-wrapper"></div>
-            <span class="time time-r"></span>
+            <div class="progress-bar-wrapper">
+              <progress-bar :percent='percent' 
+                @percentChange='onProgressBarChange'
+              ></progress-bar>
+            </div>
+            <span class="time time-r">{{format(currentSong.duration)}}</span>
           </div>
           <div class="operators">
             <div class="icon i-left">
@@ -63,7 +67,9 @@
           <p class="desc"  v-html='currentSong.singer'></p>
         </div>
         <div class="control">
-          <i @click.stop='togglePlaying' :class="miniIcon"></i>
+          <progress-circle :radius='32' :percent='percent'>
+            <i @click.stop='togglePlaying' class="icon-mini" :class="miniIcon"></i>
+          </progress-circle>
         </div>
         <div class="control">
           <i class="icon-playlist"></i> 
@@ -79,6 +85,8 @@ import {mapGetters} from 'vuex'
 import {mapMutations} from 'vuex'
 import animations from 'create-keyframe-animation'
 import {prefixStyle} from 'common/js/dom'
+import ProgressBar from 'base/progress-bar/progress-bar'
+import ProgressCircle from 'base/progress-circle/progress-circle'
 
 const transform = prefixStyle('transform')
 export default {
@@ -101,6 +109,9 @@ export default {
     disableCls() {
       return this.songReady ? '': 'disable'
     },
+    percent() {
+      return this.currentTime/this.currentSong.duration
+    },
     ...mapGetters([
       'fullScreen',
       'playList',
@@ -121,7 +132,7 @@ export default {
         return
       }
       this.setPlayingState(!this.playing);
-      this.songReady = false
+      // this.songReady = false
     },
     next(){
       if(!this.songReady){
@@ -173,6 +184,12 @@ export default {
         len++
       }
       return num
+    },
+    onProgressBarChange(percent) {
+      this.$refs.audio.currentTime = this.currentSong.duration * percent
+      if(!this.playing){
+        this.togglePlaying()
+      }
     },
     enter(el,done){
       const {x,y,scale} = this._getPosAndScale()
@@ -226,7 +243,6 @@ export default {
         scale
       }
     },
-
     ...mapMutations({
       setFullScreen : 'SET_FULL_SCREEN',
       setPlayingState : 'SET_PLAYING_STATE',
@@ -245,7 +261,8 @@ export default {
         newPlaying ? audio.play() : audio.pause()
       })
     }
-  }
+  },
+  components:{ProgressBar,ProgressCircle}
 }
 </script>
 

@@ -176,7 +176,15 @@ export default {
       this.songReady = false
     },
     end() {
-      
+      if(this.mode === this.playMode.loop){
+        this.loop()
+      }else{
+        this.next()
+      }
+    },
+    loop() {
+      this.$refs.audio.currentTime = 0
+      this.$refs.audio.play()
     },
     ready() {
       this.songReady = true 

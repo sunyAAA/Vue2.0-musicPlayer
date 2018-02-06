@@ -17,7 +17,6 @@ var appData = require('../data.json')
 var data = appData.data
 var apiRoutes = express.Router()
 app.use('/api',apiRoutes);
-
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })

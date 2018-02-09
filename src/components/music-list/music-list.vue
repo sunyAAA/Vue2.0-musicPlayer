@@ -31,12 +31,14 @@ import SongList from 'base/song-list/song-list'
 import Loading from 'base/loading/loading'
 import {prefixStyle} from 'common/js/dom'
 import {mapActions} from 'vuex'
+import {playListMixin} from 'common/js/mixin'
 
 const RESERVED_HEIGHT = 40
 const transform = prefixStyle('transform')
 // 顶部预留高度
 
 export default {
+  mixins:[playListMixin],
   props:{
     bgImage:{
       type:String,
@@ -84,7 +86,13 @@ export default {
     ...mapActions([
       'selectPlay',
       'randomPlay'
-    ])
+    ]),
+    handlePlayList(playList) {
+      const bottom  = playList.length > 0 ? '60px' : 0
+      console.log(bottom)
+      this.$refs.list.$el.style.bottom = bottom
+      this.$refs.list.refresh();
+    }
   },
   watch:{
     scrollY(newY){

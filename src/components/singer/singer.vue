@@ -1,6 +1,6 @@
 <template>
   <div class="singer" ref='singer'>
-    <list-view @select="selectSinger" :data='singers' ref="listView"></list-view>
+    <list-view @select="selectSinger" :data='singers' ref="listview"></list-view>
     <router-view></router-view>
   </div>
 </template>
@@ -36,7 +36,7 @@ export default {
       const bottom  = playList.length > 0 ? '60px' : 0
       console.log(bottom)
       this.$refs.singer.style.bottom = bottom
-      this.$refs.listView.refresh()
+      this.$refs.listview.refresh()
     },
     _getSingerList(){
       getSingerList().then((res)=>{

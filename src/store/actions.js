@@ -2,6 +2,7 @@
 import * as types from './mutation-types'
 import {playMode} from 'common/js/config'
 import {shuffle} from 'common/js/util'
+import { stat } from 'fs';
 //                                  commit用于 提交 mutation 行为   
 //                                  state获取数据状态
 function findIndex(list,song) {
@@ -33,4 +34,45 @@ export const randomPlay = function({commit},{list}){
     commit(types.SET_CURRENT_INDEX,0)
     commit(types.SET_PLAYING_STATE,true)  
 
+}
+
+export const insertSong = function({commit,state},song) {
+    let playList = state.playList.slice()
+    let sequenceList = state.sequenceList.slice()
+    let currentIndex = state.currentIndex
+
+    //记录当前歌曲
+    let currentSong = playList[currentIndex]
+    //查找当前列表中是否有待插入的歌曲
+    let fpIndex = findIndex(playList,song)
+    //因为是插入曲 所有索引+1
+    currentIndex++
+    //出入这首歌到当前索引位置
+    playList.splice(currentIndex,0,song)
+    if(fpIndex> -1) {
+        //如果当前插入的序号大于列表中的序号
+        if(currentIndex > fpIndex) {
+            playList.splice(fpIndex,1)
+            currentIndex--
+        } else {
+            playList.splice(fpIndex+1,1)
+        }
+    }
+
+    let currentSIndex = findIndex(sequenceList,currentSong) + 1
+    let fsIndex = findIndex(sequenceList,song)
+
+    sequenceList.splice(currentSIndex, 0 , song)
+
+    if(currentSIndex > fsIndex) {
+        sequenceList.splice(fsIndex,1)
+    } else {
+        sequenceList.splice(fsIndex+1,1)
+    }
+
+    commit(types.SET_PLAYLIST,playList)
+    commit(types.SET_SEQUENCE_LIST,sequenceList)
+    commit(types.SET_CURRENT_INDEX,currentIndex)
+    commit(types.SET_FULL_SCREEN,true)
+    commit(types.SET_PLAYING_STATE,true)  
 }

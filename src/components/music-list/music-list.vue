@@ -93,6 +93,7 @@ export default {
       this.$refs.list.$el.style.bottom = bottom
       this.$refs.list.refresh();
     }
+    
   },
   watch:{
     scrollY(newY){

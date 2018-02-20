@@ -13,13 +13,24 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 // 数据mock 配置
 var data = require('../data.json')
 var axios = require('axios')
-const express  = require('express')
+var express  = require('express')
 var app = express()
 
 var apiRoutes = express.Router()
-
-
-
+apiRoutes.get('/getSongList', function (req, res) {
+  var url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
+  axios.get(url, {
+    headers: {
+      referer: 'https://c.y.qq.com/',
+      host: 'c.y.qq.com'
+    },
+    params: req.query
+  }).then((response) => {
+    res.json(response.data)
+  }).catch((e) => {
+    console.log(e)
+  })
+})
 app.use('/api', apiRoutes)
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {

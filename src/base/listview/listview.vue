@@ -90,7 +90,7 @@ export default {
       this.scrollY = pos.y
     },
     refresh() {
-      this.$refs.listview.refresh()
+      this.$refs.listView.refresh()
     },
     _scrollTo(index){
       

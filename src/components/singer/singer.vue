@@ -36,7 +36,7 @@ export default {
       const bottom  = playList.length > 0 ? '60px' : 0
       console.log(bottom)
       this.$refs.singer.style.bottom = bottom
-      this.$refs.listview.refresh()
+      this.$refs.listview && this.$refs.listview.refresh()
     },
     _getSingerList(){
       getSingerList().then((res)=>{

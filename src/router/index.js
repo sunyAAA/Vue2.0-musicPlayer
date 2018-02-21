@@ -31,10 +31,6 @@ export default new Router({
       }]
     },
     {
-      path: '/rank',
-      component: Rank
-    },
-    {
       path: '/search',
       component: Search,
       children: [{

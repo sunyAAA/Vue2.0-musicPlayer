@@ -55,8 +55,7 @@ export default {
     }
   },
   components:{
-    SearchBox,
-    Suggest
+    SearchBox, Suggest
   }
 }
 </script>

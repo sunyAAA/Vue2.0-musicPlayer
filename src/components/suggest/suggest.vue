@@ -1,5 +1,6 @@
 <template>
-  <scroll class="suggest" :data='result' :pullup='pullup' @scrollToEnd='searchMore' ref='suggest'>
+  <scroll class="suggest" :data='result' :pullup='pullup' :beforeScroll='beforeScroll'  
+              @scrollToEnd='searchMore' @beforeScroll='listScroll' ref='suggest'>
     <ul class="suggest-list">
       <li class="suggest-item" v-for='(item,index) in result' :key="index" @click='selectItem(item)'>
         <div class="icon">
@@ -46,6 +47,7 @@ export default {
       page: 1,
       result: [],
       pullup: true,
+      beforeScroll:true,
       hasMore: true
     }
   },
@@ -105,6 +107,11 @@ export default {
       } else {
         this.insertSong(item)
       }
+      // 派发选择歌曲事件
+      this.$emit('select')
+    },
+    listScroll() {
+      this.$emit('listScroll')
     },
     _genResult(data) {
       let ret = []

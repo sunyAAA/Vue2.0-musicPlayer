@@ -20,7 +20,8 @@
     "vue-lazyload": "^1.0.3",
     "vue-router": "^3.0.1",
     "vuex": "^2.3.1",
-    "create-keyframe-animation": "^0.1.0"
+    "create-keyframe-animation": "^0.1.0",
+    "good-storage": "1.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

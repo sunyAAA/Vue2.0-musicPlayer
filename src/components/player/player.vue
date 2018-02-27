@@ -71,11 +71,12 @@
             <i @click.stop='togglePlaying' class="icon-mini" :class="miniIcon"></i>
           </progress-circle>
         </div>
-        <div class="control">
+        <div class="control" @click.stop='showPlayList'>
           <i class="icon-playlist"></i> 
         </div>
       </div>
     </transition>
+    <play-list ref='playList'></play-list>
     <audio ref='audio' :src="currentSong.url" @canplay="ready" 
       @error="error" 
       @timeupdate="updateTime"
@@ -93,6 +94,7 @@ import ProgressBar from 'base/progress-bar/progress-bar'
 import ProgressCircle from 'base/progress-circle/progress-circle'
 import {playMode} from 'common/js/config'
 import {shuffle} from 'common/js/util'
+import PlayList from 'components/playlist/playlist'
 
 const transform = prefixStyle('transform')
 export default {
@@ -285,6 +287,9 @@ export default {
         scale
       }
     },
+    showPlayList() {
+      this.$refs.playList.show()
+    },
     ...mapMutations({
       setFullScreen : 'SET_FULL_SCREEN',
       setPlayingState : 'SET_PLAYING_STATE',
@@ -295,6 +300,9 @@ export default {
   },
   watch:{
     currentSong(newSong,oldSong) {
+      if(!newSong.id) {
+        return
+      }
       if(newSong.id === oldSong.id){
         return
       }
@@ -310,7 +318,11 @@ export default {
       })
     }
   },
-  components:{ProgressBar,ProgressCircle}
+  components:{
+    ProgressBar,
+    ProgressCircle,
+    PlayList
+  }
 }
 </script>
 

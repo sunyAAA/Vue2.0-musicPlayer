@@ -89,7 +89,6 @@ export default {
     ]),
     handlePlayList(playList) {
       const bottom  = playList.length > 0 ? '60px' : 0
-      console.log(bottom)
       this.$refs.list.$el.style.bottom = bottom
       this.$refs.list.refresh();
     }

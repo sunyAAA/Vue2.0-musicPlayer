@@ -34,7 +34,6 @@ export default {
     },
     handlePlayList(playList) {
       const bottom  = playList.length > 0 ? '60px' : 0
-      console.log(bottom)
       this.$refs.singer.style.bottom = bottom
       this.$refs.listview && this.$refs.listview.refresh()
     },

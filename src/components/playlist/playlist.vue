@@ -12,8 +12,8 @@
           </h1>
         </div>
         <scroll ref='listContent' class="list-content" :data='sequenceList'>
-          <ul>
-            <li class="item" v-for='(item,index) in sequenceList' :key='index'
+          <transition-group name='list'>
+            <li class="item" v-for='item in sequenceList' :key='item.id'
               ref='listItem'
               @click='selectItem(item,index)'
             >
@@ -26,7 +26,7 @@
                 <i class="icon-delete"></i>
               </span>
             </li>
-          </ul>
+          </transition-group>
         </scroll>
         <div class="list-operate">
           <div class="add">

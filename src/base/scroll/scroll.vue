@@ -31,6 +31,10 @@ export default {
     beforeScroll :  {
       type : Boolean,
       default : false
+    },
+    refreshDelay: {
+      type: Number,
+      default: 40
     }
   },
   methods: {
@@ -87,7 +91,7 @@ export default {
     data() {
       setTimeout(() => {
         this.refresh();
-      }, 40);
+      }, this.refreshDelay);
     }
   }
 };

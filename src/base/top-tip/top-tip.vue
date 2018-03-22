@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  props:{
+  props: {
     delay: {
       type: Number,
       default: 2000
@@ -25,7 +25,7 @@ export default {
       clearTimeout(this.timer)
       this.timer = setTimeout(() => {
         this.hide()
-      }, this.delay);
+      }, this.delay)
     },
     hide() {
       this.showFlag = false
@@ -35,18 +35,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
-  @import "~common/stylus/variable";
-
-  .top-tip
-    position fixed
-    top 0
-    width 100%
-    z-index 500
-    background $color-dialog-background
-    &.drop-enter-avtive, &.drop-leave-active
-      transition all 0.3
-    &.drop-enter, $.drop-leave-to
-      transform translate3d(0, 100% ,0)  
+@import '~common/stylus/variable'
+.top-tip
+  position fixed
+  top 0
+  width 100%
+  z-index 500
+  background $color-dialog-background
+  &.drop-enter-avtive, &.drop-leave-active
+    transition all 0.3
+  &.drop-enter, $.drop-leave-to
+    transform translate3d(0, 100%, 0)
 </style>
 
